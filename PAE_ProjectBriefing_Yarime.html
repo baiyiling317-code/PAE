@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAE Project Briefing · HKUST MPP 2025–27</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:#1B2A3B;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+:root{
+  --navy:#0C1F3F;--navy2:#152D52;--teal:#0A8A9F;--teal-lt:#E0F5F8;
+  --amber:#C97820;--f8:#F6F9FC;--border:#DDE4EE;
+  --muted:#6B7E94;--id:#166534;--id-lt:#DCFCE7;--vn:#991B1B;--vn-lt:#FEE2E2;--sa:#92400E;--sa-lt:#FEF3C7;
+  --sh:0 2px 12px rgba(12,31,63,.08);--sh2:0 8px 32px rgba(12,31,63,.12);--r:12px}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px}
+
+/* NAV */
+.nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(12,31,63,.96);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:52px;border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-brand{font-size:11px;font-weight:700;letter-spacing:2.5px;color:#7BAFD4;text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:11px;font-weight:600;letter-spacing:1px;color:#6B8BAC;text-decoration:none;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#E0F5F8}
+@media(max-width:768px){.nav-links{display:none}}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--navy);display:flex;align-items:center;padding:120px 2.5rem 80px;position:relative;overflow:hidden}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(10,138,159,.2) 1px,transparent 1px);background-size:36px 36px;animation:dotshift 20s linear infinite;pointer-events:none}
+@keyframes dotshift{0%{background-position:0 0}100%{background-position:36px 36px}}
+.hero-glow{position:absolute;top:-20%;right:-5%;width:55%;height:130%;background:radial-gradient(ellipse,rgba(10,138,159,.18) 0%,transparent 65%);pointer-events:none;animation:glowpulse 6s ease-in-out infinite}
+@keyframes glowpulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.hero-inner{max-width:1080px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--teal);text-transform:uppercase;margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:2px;background:var(--teal)}
+.hero-title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-.02em;margin-bottom:.6rem}
+.hero-title em{font-style:normal;color:var(--teal)}
+.hero-sub{font-size:clamp(1.1rem,2.2vw,1.4rem);color:#7BAFD4;margin-bottom:2.5rem;max-width:580px;line-height:1.6}
+.markets{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:3rem}
+.mchip{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem 1.1rem;border-radius:999px;font-size:13px;font-weight:600;border:1px solid;letter-spacing:.3px}
+.mc-id{background:rgba(22,101,52,.25);color:#4ADE80;border-color:rgba(74,222,128,.35)}
+.mc-vn{background:rgba(153,27,27,.25);color:#FCA5A5;border-color:rgba(252,165,165,.35)}
+.mc-sa{background:rgba(146,64,14,.25);color:#FCD34D;border-color:rgba(252,211,77,.35)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,auto);gap:2rem;margin-bottom:3rem;width:fit-content}
+.hstat{}
+.hstat-n{font-family:Georgia,serif;font-size:3rem;font-weight:700;color:var(--teal);line-height:1}
+.hstat-l{font-size:11px;color:#6B8BAC;letter-spacing:.5px;margin-top:.3rem}
+.scards{display:flex;gap:1rem;flex-wrap:wrap}
+.scard{display:flex;align-items:center;gap:.85rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.85rem 1.25rem}
+.sav{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;color:#fff}
+.av-g{background:var(--teal)}.av-y{background:var(--amber)}
+.scard-role{font-size:10px;color:#5E7087;letter-spacing:1px;text-transform:uppercase;margin-bottom:.15rem}
+.scard-name{font-size:13px;color:#CADCFC;font-weight:600}
+
+/* SECTIONS */
+.sec{padding:6rem 2.5rem}
+.sec-alt{background:var(--f8)}
+.sec-dark{background:var(--navy)}
+.sec-inner{max-width:1080px;margin:0 auto}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--teal);text-transform:uppercase;margin-bottom:.6rem}
+.eyebrow-dk{color:#5CE4EF}
+.sec-title{font-family:Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:.6rem}
+.sec-title-wh{color:#fff}
+.sec-lead{font-size:1.05rem;color:var(--muted);margin-bottom:3rem;max-width:560px;line-height:1.75}
+.sec-lead-lt{color:#7BAFD4}
+
+/* RESEARCH QUESTION */
+.rq{background:var(--navy);border-radius:var(--r);padding:2.5rem 3rem;margin-bottom:2.5rem;border:1px solid rgba(10,138,159,.3);position:relative;overflow:hidden;text-align:center}
+.rq::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(10,138,159,.2) 0%,transparent 70%);pointer-events:none}
+.rq-label{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--teal);text-transform:uppercase;margin-bottom:.75rem}
+.rq-text{font-family:Georgia,serif;font-size:clamp(1.1rem,2.2vw,1.35rem);color:#E2EBF5;line-height:1.9;font-style:italic;position:relative;z-index:1}
+.rq-text strong{color:#5CE4EF;font-style:normal}
+
+/* GRIDS */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:900px){.g3,.g4{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
+@media(max-width:600px){.g3,.g4{grid-template-columns:1fr}.hero-stats{grid-template-columns:repeat(2,auto)}}
+
+/* MARKET CARDS */
+.mcard{border-radius:var(--r);padding:1.75rem}
+.mc-card-id{background:var(--id-lt);border:1px solid #A7F3D0}
+.mc-card-vn{background:var(--vn-lt);border:1px solid #FECACA}
+.mc-card-sa{background:var(--sa-lt);border:1px solid #FDE68A}
+.mcard-flag{font-size:2.2rem;margin-bottom:1rem}
+.mcard-name{font-size:16px;font-weight:700;margin-bottom:.35rem}
+.n-id{color:var(--id)}.n-vn{color:var(--vn)}.n-sa{color:var(--sa)}
+.mtag{display:inline-block;padding:.25rem .7rem;border-radius:4px;font-size:11px;font-weight:700;color:#fff;margin-bottom:.75rem}
+.t-id{background:var(--id)}.t-vn{background:var(--vn)}.t-sa{background:var(--sa)}
+.mcard-body{font-size:13.5px;color:var(--muted);line-height:1.7}
+
+/* DIM CARDS */
+.dim{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.25rem;border-top:3px solid;box-shadow:var(--sh)}
+.dim-t{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:.35rem}
+.dim-d{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+/* GSMA PAIN POINT TABLE */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh2)}
+.pain-hdr{display:grid;grid-template-columns:1fr 1fr}
+.pain-hdr-l{background:var(--navy);color:#fff;padding:1rem 1.5rem;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.pain-hdr-r{background:var(--teal);color:#fff;padding:1rem 1.5rem;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.pain-row{display:contents}
+.pain-l{background:#fff;padding:1.4rem 1.5rem;border-top:1px solid var(--border);display:flex;gap:.9rem;align-items:flex-start}
+.pain-r{background:var(--teal-lt);padding:1.4rem 1.5rem;border-top:1px solid #C7EDF4;display:flex;gap:.9rem;align-items:flex-start}
+.pain-icon{font-size:1.3rem;flex-shrink:0;margin-top:.05rem;line-height:1}
+.pain-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:.25rem;line-height:1.35}
+.pain-title-r{color:#065F6A}
+.pain-desc{font-size:12.5px;color:var(--muted);line-height:1.6}
+.pain-desc-r{color:#0A6C7A}
+@media(max-width:768px){.pain-grid{grid-template-columns:1fr}.pain-hdr-r{display:none}}
+
+/* PROFILE CARD */
+.pcard{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);border-radius:var(--r);padding:1.75rem 2rem;display:flex;gap:1.5rem;align-items:flex-start;margin-bottom:2rem;border:1px solid rgba(255,255,255,.08);box-shadow:var(--sh2)}
+.pav-circle{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;flex-shrink:0}
+.pav-t{background:var(--teal)}.pav-a{background:var(--amber)}
+.pname{font-size:17px;font-weight:700;color:#fff;margin-bottom:.2rem}
+.ptitle{font-size:12px;color:#7BAFD4;margin-bottom:.75rem}
+.pquote{font-size:13.5px;color:#CADCFC;font-style:italic;line-height:1.75;border-left:2px solid var(--teal);padding-left:.85rem}
+
+/* VENN / ALIGNMENT */
+.venn-wrap{display:flex;gap:0;align-items:stretch;margin-bottom:2rem;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh2)}
+.venn-col{flex:1;padding:2.5rem 2rem}
+.venn-l{background:#fff}
+.venn-m{background:linear-gradient(135deg,var(--teal-lt) 0%,#D4F0F5 100%);flex:0 0 260px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-left:1px solid #C7EDF4;border-right:1px solid #C7EDF4;padding:2.5rem 1.5rem}
+.venn-r{background:var(--f8)}
+.venn-col-hdr{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.25rem}
+.vhdr-l{color:var(--amber)}
+.vhdr-m{color:var(--teal);margin-bottom:1rem}
+.vhdr-r{color:var(--navy)}
+.venn-item{display:flex;align-items:flex-start;gap:.6rem;font-size:14px;color:var(--muted);margin-bottom:.85rem;line-height:1.5}
+.venn-item strong{color:var(--navy)}
+.vdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:.45rem}
+.vdot-a{background:var(--amber)}.vdot-t{background:var(--teal)}.vdot-n{background:var(--navy)}
+.overlap-badge{background:var(--teal);color:#fff;border-radius:8px;padding:.85rem 1.1rem;font-size:13px;font-weight:700;line-height:1.5;margin-bottom:1rem}
+.overlap-note{font-size:12px;color:#065F6A;line-height:1.6}
+@media(max-width:900px){.venn-wrap{flex-direction:column}.venn-m{flex:none;border-left:none;border-right:none;border-top:1px solid #C7EDF4;border-bottom:1px solid #C7EDF4}}
+
+/* DELIVERABLES */
+.dlv{display:flex;gap:1.5rem;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.75rem 2rem;box-shadow:var(--sh);margin-bottom:1rem;transition:box-shadow .25s,transform .25s}
+.dlv:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.dlv-num{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0}
+.dlv-title{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.dlv-meta{font-size:12px;color:var(--muted);margin-bottom:.6rem;display:flex;gap:1.25rem;flex-wrap:wrap}
+.dlv-desc{font-size:13.5px;color:var(--muted);line-height:1.7;max-width:640px}
+.dlv-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+
+/* NEXT STEPS */
+.nsteps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+@media(max-width:768px){.nsteps-row{grid-template-columns:1fr}}
+.nstep{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:2rem 1.75rem;box-shadow:var(--sh);text-align:center;transition:box-shadow .25s,transform .25s}
+.nstep:hover{box-shadow:var(--sh2);transform:translateY(-3px)}
+.ns-icon{font-size:2.2rem;margin-bottom:1rem}
+.ns-num{font-family:Georgia,serif;font-size:2.8rem;font-weight:700;color:var(--teal);line-height:1;margin-bottom:.5rem}
+.ns-title{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:.6rem;line-height:1.3}
+.ns-desc{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* FOOTER */
+footer{background:var(--navy);padding:3rem 2.5rem;text-align:center}
+footer p{font-size:13px;color:#3E5570}
+footer strong{color:var(--teal)}
+
+/* ANIMATIONS */
+.fi{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fi.vis{opacity:1;transform:none}
+.fi-l{opacity:0;transform:translateX(-24px);transition:opacity .6s ease,transform .6s ease}
+.fi-l.vis{opacity:1;transform:none}
+.fi-r{opacity:0;transform:translateX(24px);transition:opacity .6s ease,transform .6s ease}
+.fi-r.vis{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.18s}.d3{transition-delay:.26s}.d4{transition-delay:.34s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">PAE · HKUST PPOL · 2025–27</div>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#gsma">GSMA</a></li>
+    <li><a href="#advisor">Prof. Yarime</a></li>
+    <li><a href="#deliverables">Deliverables</a></li>
+    <li><a href="#nextsteps">Next Steps</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-dots"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Policy Analysis Exercise · PPOL HKUST · 2025–27</div>
+    <h1 class="hero-title">Navigating<br><em>Market Entry</em></h1>
+    <p class="hero-sub">How regulatory barriers shape ICT firms in emerging economies — and what policy can do about it.</p>
+    <div class="markets">
+      <span class="mchip mc-id">🇮🇩 Indonesia</span>
+      <span class="mchip mc-vn">🇻🇳 Vietnam</span>
+      <span class="mchip mc-sa">🇸🇦 Saudi Arabia</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n" data-target="3">0</div><div class="hstat-l">Markets</div></div>
+      <div class="hstat"><div class="hstat-n" data-target="6">0</div><div class="hstat-l">Team Members</div></div>
+      <div class="hstat"><div class="hstat-n" data-target="4">0</div><div class="hstat-l">Dimensions</div></div>
+      <div class="hstat"><div class="hstat-n" data-target="3">0</div><div class="hstat-l">Deliverables</div></div>
+    </div>
+    <div class="scards">
+      <div class="scard">
+        <div class="sav av-g">JW</div>
+        <div>
+          <div class="scard-role">Industry Client · Confirmed ✓</div>
+          <div class="scard-name">Jeanette Whyte · Head of Public Policy APAC · GSMA</div>
+        </div>
+      </div>
+      <div class="scard">
+        <div class="sav av-y">YM</div>
+        <div>
+          <div class="scard-role">Faculty Advisor · In Discussion</div>
+          <div class="scard-name">Prof. YARIME Masaru · HKUST</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH DESIGN -->
+<section class="sec sec-alt" id="research">
+  <div class="sec-inner">
+    <div class="eyebrow fi">01 · Research Design</div>
+    <h2 class="sec-title fi">One Question. Three Markets.</h2>
+    <div class="rq fi">
+      <div class="rq-label">Core Research Question</div>
+      <p class="rq-text">What <strong>regulatory, institutional, and political economy barriers</strong> do ICT firms face when entering high-growth emerging markets — and what <strong>policy interventions</strong> can lower these barriers while advancing host countries' digital development goals?</p>
+    </div>
+    <div class="g3 fi" style="margin-bottom:2rem">
+      <div class="mcard mc-card-id fi d1">
+        <div class="mcard-flag">🇮🇩</div>
+        <div class="mcard-name n-id">Indonesia</div>
+        <span class="mtag t-id">5G Spectrum Reform</span>
+        <div class="mcard-body">Largest SEA digital economy. 5G mid-band clearance delayed to 2027. Spectrum fees exceed 12% of operator revenue — highest in APAC. GSMA estimates $14B economic loss from mis-pricing.</div>
+      </div>
+      <div class="mcard mc-card-vn fi d2">
+        <div class="mcard-flag">🇻🇳</div>
+        <div class="mcard-name n-vn">Vietnam</div>
+        <span class="mtag t-vn">Data Localisation</span>
+        <div class="mcard-body">Three overlapping data laws effective July 2026: Cybersecurity Law, Data Law, Personal Data Protection Law — one of Asia's most complex compliance environments for foreign ICT operators.</div>
+      </div>
+      <div class="mcard mc-card-sa fi d3">
+        <div class="mcard-flag">🇸🇦</div>
+        <div class="mcard-name n-sa">Saudi Arabia</div>
+        <span class="mtag t-sa">Vision 2030</span>
+        <div class="mcard-body">Four parallel regulators: CITC, SDAIA, NCA, PDPL. Government procurement demands significant local content. Geopolitical positioning shapes tech partner selection beyond formal rules.</div>
+      </div>
+    </div>
+    <div class="g4 fi">
+      <div class="dim d1" style="border-color:var(--teal)"><div class="dim-t">Regulatory Architecture</div><div class="dim-d">Spectrum licensing, data governance, security review</div></div>
+      <div class="dim d2" style="border-color:var(--id)"><div class="dim-t">Institutional Actors</div><div class="dim-d">Government agencies, regulators, industry associations</div></div>
+      <div class="dim d3" style="border-color:var(--amber)"><div class="dim-t">Political Economy</div><div class="dim-d">Industrial policy, geopolitical pressures, procurement bias</div></div>
+      <div class="dim d4" style="border-color:var(--vn)"><div class="dim-t">Policy Gaps</div><div class="dim-d">Misalignments between regulation and ICT firm needs</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GSMA -->
+<section class="sec" id="gsma">
+  <div class="sec-inner">
+    <div class="eyebrow fi">02 · Industry Client</div>
+    <h2 class="sec-title fi">What GSMA Faces — What We Solve</h2>
+    <div class="pcard fi">
+      <div class="pav-circle pav-t">JW</div>
+      <div>
+        <div class="pname">Jeanette Whyte</div>
+        <div class="ptitle">Head of Public Policy APAC · GSMA · Hong Kong · Former Director, BT</div>
+        <div class="pquote">"The topic is interesting and aligns with a number of issues my team is currently working on. I would be happy to have an exploratory conversation in early July once I am back."</div>
+      </div>
+    </div>
+    <div class="fi">
+      <div class="pain-hdr">
+        <div class="pain-hdr-l">🚧 &nbsp;GSMA's Day-to-Day Challenge</div>
+        <div class="pain-hdr-r">✅ &nbsp;What Our Research Delivers</div>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-l">
+          <div class="pain-icon">📣</div>
+          <div>
+            <div class="pain-title">Their advocacy is dismissed as biased</div>
+            <div class="pain-desc">When GSMA lobbies regulators, governments see it as industry self-interest — not objective evidence.</div>
+          </div>
+        </div>
+        <div class="pain-r">
+          <div class="pain-icon">🎓</div>
+          <div>
+            <div class="pain-title pain-title-r">Independent HKUST academic research</div>
+            <div class="pain-desc pain-desc-r">No commercial motive. No industry fees. A university study they can cite in government dialogue with full credibility.</div>
+          </div>
+        </div>
+        <div class="pain-l">
+          <div class="pain-icon">📊</div>
+          <div>
+            <div class="pain-title">Only single-market reports exist</div>
+            <div class="pain-desc">Their Indonesia 5G report, their Vietnam brief — each stands alone. Members need to compare markets, not read three separate documents.</div>
+          </div>
+        </div>
+        <div class="pain-r">
+          <div class="pain-icon">🗺️</div>
+          <div>
+            <div class="pain-title pain-title-r">One rigorous 3-market comparison</div>
+            <div class="pain-desc pain-desc-r">Same analytical framework applied to Indonesia, Vietnam, Saudi Arabia — enabling direct cross-market comparison for the first time.</div>
+          </div>
+        </div>
+        <div class="pain-l">
+          <div class="pain-icon">❓</div>
+          <div>
+            <div class="pain-title">They know <em>what</em> barriers exist, not <em>why</em></div>
+            <div class="pain-desc">Technical regulatory reports describe rules. They don't explain the political economy — industrial policy incentives, geopolitical pressures, procurement bias logic.</div>
+          </div>
+        </div>
+        <div class="pain-r">
+          <div class="pain-icon">🔍</div>
+          <div>
+            <div class="pain-title pain-title-r">Political economy analysis layer</div>
+            <div class="pain-desc pain-desc-r">We explain why regulations are designed the way they are — giving GSMA the strategic insight to engage at the right level with the right arguments.</div>
+          </div>
+        </div>
+        <div class="pain-l">
+          <div class="pain-icon">📋</div>
+          <div>
+            <div class="pain-title">Vietnam's 2026 law is unmapped</div>
+            <div class="pain-desc">Three overlapping data laws just took effect. No systematic analysis exists yet of what they mean for ICT operators in practice.</div>
+          </div>
+        </div>
+        <div class="pain-r">
+          <div class="pain-icon">✍️</div>
+          <div>
+            <div class="pain-title pain-title-r">Complete compliance framework mapping</div>
+            <div class="pain-desc pain-desc-r">We map all three laws, identify conflicts and ambiguities, and translate legal text into operational implications for ICT firms and for GSMA's advocacy brief.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROF. YARIME -->
+<section class="sec sec-alt" id="advisor">
+  <div class="sec-inner">
+    <div class="eyebrow fi">03 · Faculty Advisor</div>
+    <h2 class="sec-title fi">Why the Research Fit is Genuine</h2>
+    <p class="sec-lead fi">Prof. Yarime's research on regulatory design and technology governance in emerging economies maps directly onto what this project sets out to study.</p>
+    <div class="pcard fi" style="border-color:rgba(201,120,32,.3)">
+      <div class="pav-circle pav-a">YM</div>
+      <div>
+        <div class="pname">YARIME Masaru</div>
+        <div class="ptitle">Professor · HKUST · Science, Technology and Innovation Policy</div>
+        <div class="pquote">"This is a very interesting and important issue, so I would be pleased to be the advisor for your project."</div>
+      </div>
+    </div>
+    <div class="venn-wrap fi">
+      <div class="venn-col venn-l">
+        <div class="venn-col-hdr vhdr-l">Prof. Yarime's Research</div>
+        <div class="venn-item"><span class="vdot vdot-a"></span><div><strong>AI self-regulation in emerging economies</strong> — governance frameworks for technology in developing market contexts</div></div>
+        <div class="venn-item"><span class="vdot vdot-a"></span><div><strong>Data governance for smart cities</strong> — how data policy shapes digital infrastructure and technology adoption</div></div>
+        <div class="venn-item"><span class="vdot vdot-a"></span><div><strong>Regulatory design and technology adoption</strong> — how rules enable or obstruct firms entering new markets</div></div>
+      </div>
+      <div class="venn-col venn-m">
+        <div class="venn-col-hdr vhdr-m">Where they connect</div>
+        <div class="overlap-badge">How regulatory design shapes ICT market access in emerging economies</div>
+        <div class="overlap-note">Our project <em>applies</em> Prof. Yarime's analytical lens — from smart cities and AI governance to ICT firm market entry across Indonesia, Vietnam, and Saudi Arabia.</div>
+      </div>
+      <div class="venn-col venn-r">
+        <div class="venn-col-hdr vhdr-r">Our PAE Research</div>
+        <div class="venn-item"><span class="vdot vdot-n"></span><div><strong>ICT regulatory barriers</strong> — spectrum, data governance, security review, government procurement across three emerging markets</div></div>
+        <div class="venn-item"><span class="vdot vdot-n"></span><div><strong>Political economy of regulation</strong> — why barriers persist beyond formal rules: industrial policy, geopolitics, procurement bias</div></div>
+        <div class="venn-item"><span class="vdot vdot-n"></span><div><strong>Cross-national comparison</strong> — same analytical framework across three jurisdictions, enabling systematic institutional comparison</div></div>
+      </div>
+    </div>
+    <div class="g2 fi">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;box-shadow:var(--sh)">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:1rem">What Prof. Yarime brings us</div>
+        <div class="venn-item" style="margin-bottom:.75rem"><span class="vdot vdot-t"></span><div style="font-size:13.5px;color:var(--muted)"><strong style="color:var(--navy)">Analytical framework</strong> for cross-national regulatory comparison — the methodological backbone we need</div></div>
+        <div class="venn-item" style="margin-bottom:.75rem"><span class="vdot vdot-t"></span><div style="font-size:13.5px;color:var(--muted)"><strong style="color:var(--navy)">Academic guidance</strong> on research design, interview protocols, and rigour</div></div>
+        <div class="venn-item"><span class="vdot vdot-t"></span><div style="font-size:13.5px;color:var(--muted)"><strong style="color:var(--navy)">Network access</strong> to researchers and policy practitioners in our target markets</div></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;box-shadow:var(--sh)">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:1rem">What we bring Prof. Yarime</div>
+        <div class="venn-item" style="margin-bottom:.75rem"><span class="vdot vdot-a"></span><div style="font-size:13.5px;color:var(--muted)"><strong style="color:var(--navy)">Original primary data</strong> across Indonesia, Vietnam, Saudi Arabia — markets rarely studied together</div></div>
+        <div class="venn-item" style="margin-bottom:.75rem"><span class="vdot vdot-a"></span><div style="font-size:13.5px;color:var(--muted)"><strong style="color:var(--navy)">Applied extension</strong> of his regulatory design framework into ICT market access — a new domain</div></div>
+        <div class="venn-item"><span class="vdot vdot-a"></span><div style="font-size:13.5px;color:var(--muted)"><strong style="color:var(--navy)">GSMA practitioner access</strong> — policy practitioners across APAC relevant to his applied governance research</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="sec" id="deliverables">
+  <div class="sec-inner">
+    <div class="eyebrow fi">04 · What We Produce</div>
+    <h2 class="sec-title fi">Three Deliverables. One Narrative Arc.</h2>
+    <p class="sec-lead fi">Facts → Diagnosis → Solutions. Each builds on the last.</p>
+    <div class="dlv fi d1">
+      <div class="dlv-num" style="background:var(--navy)">D1</div>
+      <div>
+        <div class="dlv-tag">Comparative Report · January 2027</div>
+        <div class="dlv-title">Indonesia · Vietnam · Saudi Arabia — ICT Regulatory Environment Study</div>
+        <div class="dlv-meta"><span>📄 ~25 pages</span><span>🎓 Academic + GSMA reference</span></div>
+        <div class="dlv-desc">Cross-market regulatory comparison matrix · Individual country case studies with enforcement-intensity analysis · Near-term regulatory change forecast</div>
+      </div>
+    </div>
+    <div class="dlv fi d2">
+      <div class="dlv-num" style="background:var(--teal)">D2</div>
+      <div>
+        <div class="dlv-tag">Policy Memo · January 2027</div>
+        <div class="dlv-title">Policy Gap & Risk Assessment — ICT Market Entry Barriers</div>
+        <div class="dlv-meta"><span>📄 ~12 pages</span><span>📋 GSMA internal use</span></div>
+        <div class="dlv-desc">10–15 priority policy gaps per market with impact and likelihood scores · Risk matrix (High / Medium / Low) · Hidden barriers analysis — opaque approvals, departmental conflicts, geopolitical influences</div>
+      </div>
+    </div>
+    <div class="dlv fi d3">
+      <div class="dlv-num" style="background:var(--id)">D3</div>
+      <div>
+        <div class="dlv-tag">Policy White Paper · March 2027</div>
+        <div class="dlv-title">Tailored Policy Recommendations for GSMA Asia Pacific</div>
+        <div class="dlv-meta"><span>📄 ~15 pages</span><span>🗣️ Advocacy-ready</span></div>
+        <div class="dlv-desc">4 cross-market recommendations + 3 per country · Each proposal balances ICT firm interests with host-country digital development goals · GSMA advocacy toolkit: talking points, evidence anchors, international best practices</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEPS -->
+<section class="sec sec-alt" id="nextsteps">
+  <div class="sec-inner">
+    <div class="eyebrow fi">05 · Next Steps</div>
+    <h2 class="sec-title fi">Three Actions. Starting Now.</h2>
+    <p class="sec-lead fi">Clear and immediate. Today's meeting is the first step.</p>
+    <div class="nsteps-row fi">
+      <div class="nstep d1">
+        <div class="ns-icon">📅</div>
+        <div class="ns-title">Confirm the GSMA call</div>
+        <div class="ns-desc">Jeanette Whyte has agreed to an exploratory conversation in early July. We will propose two concrete dates this week and confirm the call format. This is our first direct client touchpoint.</div>
+      </div>
+      <div class="nstep d2">
+        <div class="ns-icon">📖</div>
+        <div class="ns-title">Deep-dive into the subject</div>
+        <div class="ns-desc">Each team member takes ownership of one market. We build substantive knowledge of the regulatory landscape — spectrum, data governance, procurement rules — so the GSMA call is a genuine conversation, not a surface-level pitch.</div>
+      </div>
+      <div class="nstep d3">
+        <div class="ns-icon">🎓</div>
+        <div class="ns-title">Guidance from Prof. Yarime</div>
+        <div class="ns-desc">We look forward to refining our research design and interview framework under your guidance. Your analytical framework and network are exactly what this project needs to be both academically rigorous and practically relevant.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="max-width:1080px;margin:0 auto">
+    <p>PAE Project · PPOL HKUST · MPP 2025–27 &nbsp;·&nbsp; Team Lead: <strong>Bai Yiling</strong> &nbsp;·&nbsp; <strong>ybaiau@connect.ust.hk</strong></p>
+    <p style="margin-top:.4rem">Client: <strong>GSMA Asia Pacific</strong> · Jeanette Whyte &nbsp;·&nbsp; Advisor: <strong>Prof. YARIME Masaru</strong> · HKUST</p>
+  </div>
+</footer>
+
+<script>
+// Intersection observer
+const io = new IntersectionObserver(e => {
+  e.forEach(el => { if(el.isIntersecting){el.target.classList.add('vis');io.unobserve(el.target)} });
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.fi,.fi-l,.fi-r').forEach(el=>io.observe(el));
+
+// Counter animation
+function animateCount(el,target,duration=1200){
+  let start=null;
+  function step(ts){
+    if(!start)start=ts;
+    const p=Math.min((ts-start)/duration,1);
+    const ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(ease*target);
+    if(p<1)requestAnimationFrame(step);
+    else el.textContent=target;
+  }
+  requestAnimationFrame(step);
+}
+const statIO=new IntersectionObserver(e=>{
+  e.forEach(el=>{
+    if(el.isIntersecting){
+      const t=parseInt(el.target.dataset.target);
+      animateCount(el.target,t);
+      statIO.unobserve(el.target);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>statIO.observe(el));
+
+// Active nav
+const secs=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.nav-links a');
+const secIO=new IntersectionObserver(e=>{
+  e.forEach(el=>{
+    if(el.isIntersecting){
+      links.forEach(a=>a.classList.remove('active'));
+      const a=document.querySelector(`.nav-links a[href="#${el.target.id}"]`);
+      if(a)a.classList.add('active');
+    }
+  });
+},{threshold:.4});
+secs.forEach(s=>secIO.observe(s));
+</script>
+</body>
+</html>
