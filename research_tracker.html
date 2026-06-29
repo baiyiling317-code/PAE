@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT市场准入壁垒研究 · 三国追踪表 v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600&family=Noto+Sans+SC:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F1E7; --paper:#FCFAF3; --ink:#22282E; --ink-soft:#5B6168; --ink-faint:#8B8678;
+    --line:#DED4BC; --line-soft:#EAE2CC;
+    --c-id:#B5532E; --c-id-soft:#F3E0D5;
+    --c-vn:#1F6F66; --c-vn-soft:#DCEAE7;
+    --c-sa:#96752A; --c-sa-soft:#F1E8D2;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;}
+  .wrap{max-width:1020px;margin:0 auto;padding:40px 24px 80px;}
+
+  header{margin-bottom:32px;}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.12em;
+    color:var(--ink-faint);text-transform:uppercase;margin:0 0 10px;}
+  h1{font-family:"Noto Serif SC",serif;font-weight:600;font-size:30px;margin:0 0 8px;letter-spacing:.01em;}
+  .sub{color:var(--ink-soft);font-size:15px;margin:0 0 16px;max-width:720px;}
+  .updatebar{font-size:12px;color:var(--ink-faint);background:var(--paper);border:1px dashed var(--line);
+    border-radius:8px;padding:10px 14px;margin-bottom:16px;}
+  .updatebar b{color:var(--ink);}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;padding:14px 18px;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;font-size:13px;color:var(--ink-soft);}
+  .dot{display:inline-flex;align-items:center;gap:6px;margin-right:4px;}
+  .badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 9px;border-radius:99px;white-space:nowrap;}
+  .badge.deep{background:var(--ink);color:#fff;}
+  .badge.base{border:1px solid var(--ink-soft);color:var(--ink-soft);background:transparent;}
+  .badge.pending{border:1px dashed var(--ink-faint);color:var(--ink-faint);background:transparent;}
+
+  input.tabradio{display:none;}
+  .tabbar{display:flex;gap:4px;margin-top:28px;}
+  .tab{font-family:"Noto Serif SC",serif;font-weight:600;font-size:16px;cursor:pointer;
+    padding:13px 26px 11px;border:1px solid var(--line);border-bottom:none;border-radius:10px 10px 0 0;
+    background:var(--line-soft);color:var(--ink-faint);position:relative;top:1px;
+    transition:background .15s,color .15s;user-select:none;}
+  .tab .code{display:block;font-family:"JetBrains Mono",monospace;font-weight:500;font-size:10px;
+    letter-spacing:.08em;color:inherit;opacity:.7;margin-top:2px;}
+  #tab-id:checked ~ .tabbar label.tab-id, #tab-vn:checked ~ .tabbar label.tab-vn,
+  #tab-sa:checked ~ .tabbar label.tab-sa{background:var(--paper);color:var(--ink);border-color:var(--line);z-index:2;}
+  #tab-id:checked ~ .tabbar label.tab-id{border-top:3px solid var(--c-id);padding-top:11px;}
+  #tab-vn:checked ~ .tabbar label.tab-vn{border-top:3px solid var(--c-vn);padding-top:11px;}
+  #tab-sa:checked ~ .tabbar label.tab-sa{border-top:3px solid var(--c-sa);padding-top:11px;}
+
+  .panel{display:none;background:var(--paper);border:1px solid var(--line);border-radius:0 10px 10px 10px;
+    padding:28px 30px 8px;}
+  #tab-id:checked ~ .panel-id{display:block;}
+  #tab-vn:checked ~ .panel-vn{display:block;}
+  #tab-sa:checked ~ .panel-sa{display:block;}
+  .panel-id{--acc:var(--c-id);--acc-soft:var(--c-id-soft);}
+  .panel-vn{--acc:var(--c-vn);--acc-soft:var(--c-vn-soft);}
+  .panel-sa{--acc:var(--c-sa);--acc-soft:var(--c-sa-soft);}
+
+  .panel-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);
+    padding-bottom:16px;margin-bottom:18px;flex-wrap:wrap;gap:8px;}
+  .panel-head h2{font-family:"Noto Serif SC",serif;font-size:19px;font-weight:600;margin:0;}
+  .panel-note{font-size:13px;color:var(--ink-faint);}
+
+  /* flow diagram block */
+  .flow-wrap{margin:0 0 26px;padding:18px 18px 14px;background:#fff;border:1px solid var(--line-soft);
+    border-radius:12px;}
+  .flow-title{font-family:"Noto Serif SC",serif;font-weight:600;font-size:14px;margin:0 0 10px;color:var(--ink);}
+  .flow-caption{font-size:12.5px;color:var(--ink-soft);margin:10px 0 0;}
+  .flow-caption ol{margin:6px 0 0;padding-left:20px;}
+  .flow-caption li{margin-bottom:5px;}
+  .flow-svg-box{background:var(--bg);border-radius:10px;padding:6px;}
+  .flowbox{fill:var(--acc-soft);stroke:var(--acc);stroke-width:1.4;}
+  .flowtitle{font-family:"Noto Sans SC",sans-serif;font-size:14px;font-weight:600;fill:var(--ink);}
+  .flowsub{font-family:"Noto Sans SC",sans-serif;font-size:11.5px;fill:var(--acc);}
+  .flowarrow{stroke:var(--acc);stroke-width:1.8;fill:none;}
+
+  details.dim{border:1px solid var(--line);border-radius:10px;margin-bottom:14px;background:#fff;overflow:hidden;}
+  details.dim > summary{list-style:none;cursor:pointer;padding:15px 18px;display:flex;align-items:center;gap:12px;
+    font-family:"Noto Serif SC",serif;font-weight:600;font-size:16px;}
+  details.dim > summary::-webkit-details-marker{display:none;}
+  details.dim > summary::before{content:"▸";display:inline-block;font-size:12px;color:var(--acc);
+    transition:transform .15s;width:12px;}
+  details.dim[open] > summary::before{transform:rotate(90deg);}
+  .dim-code{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;color:#fff;background:var(--acc);
+    padding:3px 8px;border-radius:5px;letter-spacing:.04em;}
+  .dim-foot{font-size:12px;color:var(--ink-faint);margin-left:auto;font-style:italic;}
+
+  .subitems{padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;}
+  .card{border:1px solid var(--line-soft);border-left:3px solid var(--acc);border-radius:8px;
+    padding:14px 18px 16px;background:var(--bg);}
+  .card-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .card-head .code{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-faint);}
+  .card-head h4{font-size:15px;font-weight:600;margin:0;}
+
+  dl.fields{margin:0;display:grid;grid-template-columns:108px 1fr;gap:9px 14px;}
+  dl.fields dt{font-size:12px;color:var(--ink-faint);font-weight:500;padding-top:2px;}
+  dl.fields dd{margin:0;font-size:14px;color:var(--ink);}
+  dl.fields dd ol{margin:0;padding-left:19px;}
+  dl.fields dd li{margin-bottom:5px;}
+  dl.fields dd.pending{color:var(--ink-soft);}
+  dl.fields dd.pending li::marker{color:var(--acc);}
+
+  footer{margin-top:30px;font-size:12px;color:var(--ink-faint);border-top:1px solid var(--line);padding-top:16px;}
+
+  @media (max-width:640px){
+    .wrap{padding:24px 14px 60px;}
+    .tab{padding:10px 16px 9px;font-size:14px;}
+    .panel{padding:20px 16px 8px;}
+    dl.fields{grid-template-columns:1fr;}
+    dl.fields dt{padding-top:8px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">PAE · GSMA ICT 市场准入壁垒研究</p>
+    <h1>三国监管现状追踪表</h1>
+    <p class="sub">印尼 / 越南 / 沙特阿拉伯 — 按监管架构、制度行为者、政治经济、政策缺口四个维度整理，每个子项写明研究目的、目前现状、待研究问题。</p>
+    <p class="updatebar"><b>本版更新说明：</b>越南部分因2025年初政府机构大重组（原信息通信部MIC并入科技部，网络安全职能划入公安部）及多部新法生效（PDPL 2026.1、新网络安全法2026.7）已大幅修订；印尼部分补充了PDP专责机构仍未成立的最新进展；沙特数据本地化规则的资料矛盾点已标注，尚待访谈核实。各维度均加入企业实际面临的监管流程图。</p>
+    <div class="legend">
+      <span><b>研究深度标注：</b></span>
+      <span class="dot"><span class="badge deep">已深挖</span> 有具体案例/数据支撑</span>
+      <span class="dot"><span class="badge base">基础覆盖</span> 了解现状但非研究重点</span>
+      <span class="dot"><span class="badge pending">待研究</span> 需访谈或进一步查证</span>
+    </div>
+  </header>
+
+  <input type="radio" name="country" id="tab-id" class="tabradio" checked>
+  <input type="radio" name="country" id="tab-vn" class="tabradio">
+  <input type="radio" name="country" id="tab-sa" class="tabradio">
+
+  <nav class="tabbar">
+    <label for="tab-id" class="tab tab-id">印尼<span class="code">INDONESIA</span></label>
+    <label for="tab-vn" class="tab tab-vn">越南<span class="code">VIETNAM</span></label>
+    <label for="tab-sa" class="tab tab-sa">沙特<span class="code">SAUDI ARABIA</span></label>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- INDONESIA -->
+  <!-- ============================================================ -->
+  <section class="panel panel-id">
+    <div class="panel-head">
+      <h2>印尼 — 研究重点：5G频谱改革 + TKDN本地化 + PSE监管杠杆</h2>
+      <span class="panel-note">更新于本轮研究</span>
+    </div>
+
+    <div class="flow-wrap">
+      <p class="flow-title">企业进入印尼ICT市场的监管流程（示意）</p>
+      <div class="flow-svg-box">
+      <svg viewBox="0 0 760 360" width="100%" role="img">
+        <title>印尼ICT市场准入监管流程图</title>
+        <desc>设立外资实体后，企业需并行通过电信牌照与本地化认证两条审批线，再完成数据与安全合规，最后进入持续合规运营阶段。</desc>
+        <defs>
+          <marker id="arrId" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <rect class="flowbox" x="60" y="20" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="42" text-anchor="middle">① 设立外资实体</text>
+        <text class="flowsub" x="380" y="62" text-anchor="middle">依据PMA外资公司架构 + 负面/正面投资清单</text>
+        <line class="flowarrow" x1="380" y1="76" x2="380" y2="104" marker-end="url(#arrId)"/>
+        <rect class="flowbox" x="60" y="106" width="300" height="56" rx="10"/>
+        <text class="flowtitle" x="210" y="128" text-anchor="middle">② 电信牌照与频谱</text>
+        <text class="flowsub" x="210" y="148" text-anchor="middle">Komdigi / DJID / BRTI</text>
+        <rect class="flowbox" x="400" y="106" width="300" height="56" rx="10"/>
+        <text class="flowtitle" x="550" y="128" text-anchor="middle">② 本地化认证（如涉硬件）</text>
+        <text class="flowsub" x="550" y="148" text-anchor="middle">工业部 · TKDN</text>
+        <path class="flowarrow" d="M210 162 L380 194" marker-end="url(#arrId)"/>
+        <path class="flowarrow" d="M550 162 L380 194" marker-end="url(#arrId)"/>
+        <rect class="flowbox" x="60" y="196" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="218" text-anchor="middle">③ 数据与安全合规</text>
+        <text class="flowsub" x="380" y="238" text-anchor="middle">UU PDP + PSE注册 → Komdigi数字空间监督司（临时代行）/ BSSN协同</text>
+        <line class="flowarrow" x1="380" y1="252" x2="380" y2="280" marker-end="url(#arrId)"/>
+        <rect class="flowbox" x="60" y="282" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="304" text-anchor="middle">④ 运营与持续合规</text>
+        <text class="flowsub" x="380" y="324" text-anchor="middle">年度报告 · 安全事件通报 · TKDN年度复核</text>
+      </svg>
+      </div>
+      <p class="flow-caption">说明：②是并行而非顺序关系——电信牌照与TKDN认证分属Komdigi与工业部两个互不隶属的部门，企业通常需要同时准备两套材料。数据保护监管目前由Komdigi下属司局临时代行，专责的Lembaga PDP尚未成立（详见REG-02）。</p>
+    </div>
+
+    <details class="dim" open>
+      <summary><span class="dim-code">REG</span> 监管架构 <span class="dim-foot">规则讲的是什么</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">REG-01</span><h4>频谱牌照</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>印尼频谱分配的时间表和定价机制，是否会拖慢外资ICT企业在5G相关业务上的部署节奏和投资回报周期。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>监管机构是Komdigi（2025年1月由Kominfo改组而来）下属的DJID（数字基础设施总局，原SDPPI）负责频谱执行，BRTI负责网络服务层面监督。</li>
+              <li>700MHz数字红利频段自2024年起拍卖；2.6GHz是2025年5G优先频段；1.4GHz BWA于2025年10月完成竞价，7家申请仅3家通过资格审查。</li>
+              <li>全球5G主流频段3.5GHz要等到2028年才放出，比亚太多数市场晚约4年，是个具体可量化的制度性壁垒。</li>
+              <li>GSMA自己2023年的报告测算，若新拍卖频段定价持续走高，到2030年最高可能造成136亿美元GDP损失——这是运营商视角的游说论据，不代表政府立场。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>3.5GHz延迟到2028年的具体技术/行政原因是什么（卫星占用？军用频谱清频？）？</li>
+              <li>定价机制最终会不会真的走向GSMA警告的"高价拖慢部署"局面？</li>
+              <li>已完成的频段拍卖中标价格和此前同类拍卖相比是涨是跌？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">REG-02</span><h4>数据治理</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>印尼数据保护规则的执行真空期（专责监管机构尚未成立）会给企业合规带来多大的不确定性，这种不确定性本身是不是一种隐性壁垒。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>核心法律是UU PDP（2022年第27号法），2024年10月17日两年过渡期结束正式生效，不强制数据本地化，原则上要求"同等保护水平"而非物理存储位置。</li>
+              <li>但2019年GR71法规仍要求政府类"战略性"电子数据本地存储，两套规则并行。</li>
+              <li>专责的数据保护监管机构（Lembaga PDP）截至2026年5月仍未成立——设立该机构的总统令草案自2025年10月起卡在法律部"协调"阶段，目标时间已多次推迟。</li>
+              <li>专责机构缺位期间，执法权暂由Komdigi"数字空间监督司"代行，该安排被官方明确定性为"临时性质"。</li>
+              <li>2024-2025年间Komdigi审查约350个数字平台，41%的网站和34%的应用被发现潜在违规；截至2025年7月已记录56起UU PDP违规嫌疑案件，仅2025年6月就新增20起。</li>
+              <li>2025年印尼教育部系统约5800万条学生记录疑似泄露，由国家网络与密码局（BSSN）、Komdigi、教育部联合调查——是跨机构协作处置数据安全事件的实例。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>Lembaga PDP最终会在什么时间点真正运营，目前的延误对企业合规预期有多大冲击？</li>
+              <li>在专责机构缺位的情况下，企业对外资跨境数据传输的实际审批口径是怎样的？</li>
+              <li>BSSN和Komdigi在数据安全事件处置上的分工边界具体在哪？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">REG-03</span><h4>安全审查</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>PSE注册制度对不同类型数字企业（电信运营商 vs 平台型ICT企业）的实际执行尺度是否存在差异，以及这种执法工具对外资企业决策的心理效应。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>PSE（电子系统运营商）注册制度依据2019年GR71和2020年第5号部令，覆盖SaaS、云服务、电商、金融科技、社交媒体、通讯工具，无论有无本地实体都要注册。</li>
+              <li>近期监管机构已警告至少36家平台存在封禁风险，其中25家含Cloudflare、Dropbox、Duolingo、万豪、OpenAI的ChatGPT服务——执法范围已从早期的社交/内容类平台扩展到几乎所有数字服务类型。</li>
+              <li>2026年4月，Komdigi以维基媒体未按PSE法登记为由封锁其登录认证域名，是近期最具代表性的强制执行个案。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>被警告后到真正执行封禁之间，企业实际有多长的补救/注册窗口期？</li>
+              <li>PSE注册流程的实际审批耗时是多久，不同行业是否有差异？</li>
+              <li>电信运营商和纯互联网平台在PSE注册要求上是否存在区别对待？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+
+    <details class="dim">
+      <summary><span class="dim-code">INST</span> 制度行为者 <span class="dim-foot">谁来管</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">INST-01</span><h4>政策＋监管机构架构</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>Komdigi、工业部、BSSN三个独立部门之间在审批节奏上是否协调，企业是否会因为部门间不互通而面临重复申请或审批冲突。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>Komdigi（2025年1月由Kominfo改组而来）负责政策制定，下属DJID执行频谱分配、BRTI负责网络服务监管。</li>
+              <li>工业部独立负责TKDN本地化认证，跟Komdigi没有从属关系，是涉及硬件/设备类ICT企业必须单独面对的另一个审批中心。</li>
+              <li>BSSN（国家网络与密码局）在重大数据安全事件中扮演跨部门协调角色，独立于Komdigi和工业部之外。</li>
+              <li>数据保护监管职责目前由Komdigi下属司局临时代行，专责的Lembaga PDP尚未成立。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>这三到四个部门（Komdigi、工业部、BSSN，未来还有Lembaga PDP）之间是否存在审批信息共享机制？</li>
+              <li>企业实际申请流程中，是否需要分别独立走完每个部门的审批，还是存在某种"一站式"安排？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">INST-02</span><h4>主要市场参与者</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>国有控股运营商和外资背景运营商在实际市场竞争（频谱获取、牌照审批速度）中是否存在可观察的差异化待遇。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>Telkomsel母公司Telkom Indonesia由政府持股52.09%，并持有"Dwiwarna"特殊股，对董事任命和公司章程修改拥有否决权；Telkomsel贡献Telkom集团约74%营收。</li>
+              <li>IOH（Indosat Ooredoo Hutchison）具备外资背景（卡塔尔Ooredoo＋香港Hutchison）。</li>
+              <li>XLSmart由XL Axiata与Smartfren于2025年4月完成合并，服务9450万用户，约占市场四分之一。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>新进入者（尤其外资）跟既有玩家竞争频谱/牌照时，是否感受到隐性的不对等待遇？</li>
+              <li>XLSmart合并后的市场格局对潜在新进入者的竞争门槛产生了什么实际影响？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">INST-03</span><h4>行业协会</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>行业协会能在多大程度上代表外资/中小型ICT企业向监管机构传达诉求，而不只是为既有大型会员服务。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>APJII（印尼互联网服务提供商协会）拥有766家ISP会员，负责组织会员与政府沟通、反映行业关切，运营印尼互联网交换点（IIX）。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>是否存在对应的移动运营商协会（区别于互联网服务商协会）？</li>
+              <li>APJII在数据保护、PSE注册等议题上是否曾公开发表过对政府政策的立场？</li>
+              <li>外资企业能否平等加入这些协会并参与议程设置？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+
+    <details class="dim">
+      <summary><span class="dim-code">PE</span> 政治经济 <span class="dim-foot">为什么这样设、谁得利</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">PE-01</span><h4>产业政策激励</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>TKDN本地化含量门槛对不同规模、不同资本实力的ICT企业构成的实际进入壁垒高度差异。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>TKDN（本地化含量）认证制度由工业部主管，覆盖手机、电信设备等领域，常见门槛为35%。</li>
+              <li>2024年苹果iPhone16因未满足35%本地化要求被禁售近5个月。</li>
+              <li>苹果最终承诺超3亿美元投资（含Airtag代工厂、研发中心、供应链本地化）换取解禁，协议有效期到2029年。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>没有苹果体量的中小型ICT/硬件企业，有没有等价的合规路径？</li>
+              <li>TKDN门槛百分比近年是否有调整趋势（变严还是变松）？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">PE-02</span><h4>地缘政治压力</h4><span class="badge pending">待研究</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>整块仍是研究空白，需先验证印尼ICT基础设施采购（尤其5G设备和数据中心投资）是否存在明显的中美阵营选择压力，再决定是否值得作为研究重点。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>暂无直接验证的具体案例。</li>
+              <li>可能的方向：5G设备采购对华为等中国厂商的依赖程度，以及印尼同时争取微软/谷歌/Nvidia等美系云厂商数据中心投资之间的平衡——这只是假设性方向，尚未验证，不能当结论使用。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>印尼主要运营商的5G设备供应商构成是怎样的（华为/爱立信/诺基亚/三星各占多少）？</li>
+              <li>印尼政府在审批外资数据中心投资时，是否对不同来源国资本有不同的审查尺度？</li>
+              <li>这条线是否值得投入研究资源，还是应该保持基础覆盖？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">PE-03</span><h4>采购偏向</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>政府身兼监管者和最大受益方控制人的双重身份，是否在具体审批个案中真实转化为对国企的隐性偏袒。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>政府持有Telkom Indonesia 52.09%股份，并持有"Dwiwarna"特殊股，对董事任命和公司章程修改拥有否决权。</li>
+              <li>Telkomsel贡献Telkom集团约74%营收，是印尼电信市场的绝对龙头。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>在频谱分配、牌照审批的具体个案中，非国企运营商是否曾反映过不对等待遇？</li>
+              <li>这种股权结构对印尼吸引外资电信投资的整体声誉有什么影响？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+
+    <details class="dim">
+      <summary><span class="dim-code">GAP</span> 政策缺口 <span class="dim-foot">哪里不对劲（团队自建分类，非proposal原文子项）</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">GAP-01</span><h4>合规成本错位</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>全球化供应链/运营模式的ICT企业，在面对印尼本地化要求时的合规成本结构，以及这种成本是否可以被有效转移或对冲。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>苹果案例——全球供应链模式与35%本地化含量要求直接冲突，最终靠资本投入（超3亿美元）换豁免。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>这种"砸钱换豁免"的解法是否只对巨头有效？</li>
+              <li>中小企业面对同样门槛时，现实中有哪些可行选项（联合采购本地产能？技术授权合作？）？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">GAP-02</span><h4>时间表错位</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>监管时间表（尤其3.5GHz延迟）与全球ICT企业的产品/网络部署周期是否存在系统性错位，错位的代价由谁承担。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>3.5GHz频段推迟到2028年放出，落后于全球5G设备生态的主流节奏约4年。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>这个延迟具体会让印尼市场在全球5G设备采购规模经济上处于什么位置？</li>
+              <li>运营商和设备商对这个延迟的官方/非官方反应是怎样的？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">GAP-03</span><h4>主体规模错位</h4><span class="badge base">基础覆盖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>同一套TKDN规则，对不同体量企业的实际可负担性差异，以及这种差异是否构成事实上的市场准入歧视。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>苹果用投资规模（超3亿美元）换取豁免空间，这条路径只有体量足够大的企业才走得通。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>中小型ICT企业面对TKDN门槛时，除了"等不到达标就退出市场"之外是否存在其他可行路径？</li>
+              <li>印尼政府是否有专门针对中小企业的TKDN合规支持机制？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- VIETNAM -->
+  <!-- ============================================================ -->
+  <section class="panel panel-vn">
+    <div class="panel-head">
+      <h2>越南 — 研究重点：数据治理新法体系 + 2025机构重组后的国家资本结构</h2>
+      <span class="panel-note">本版已根据2025年机构重组与最新立法大幅更新</span>
+    </div>
+
+    <div class="flow-wrap">
+      <p class="flow-title">企业进入越南ICT市场的监管流程（示意，已反映2025年机构重组）</p>
+      <div class="flow-svg-box">
+      <svg viewBox="0 0 760 440" width="100%" role="img">
+        <title>越南ICT市场准入监管流程图</title>
+        <desc>设立外资实体后，企业需依次通过科技部的电信牌照审批、公安部主导的数据保护与网络安全合规，最后进入持续合规运营阶段。</desc>
+        <defs>
+          <marker id="arrVn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <rect class="flowbox" x="60" y="20" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="42" text-anchor="middle">① 设立外资实体</text>
+        <text class="flowsub" x="380" y="62" text-anchor="middle">基础设施类电信合资外资上限49%</text>
+        <line class="flowarrow" x1="380" y1="76" x2="380" y2="104" marker-end="url(#arrVn)"/>
+        <rect class="flowbox" x="60" y="106" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="128" text-anchor="middle">② 电信牌照与频谱</text>
+        <text class="flowsub" x="380" y="148" text-anchor="middle">科技部（2025年3月起由原MIC并入组建）</text>
+        <line class="flowarrow" x1="380" y1="162" x2="380" y2="190" marker-end="url(#arrVn)"/>
+        <rect class="flowbox" x="60" y="192" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="214" text-anchor="middle">③ 数据保护影响评估</text>
+        <text class="flowsub" x="380" y="234" text-anchor="middle">公安部A05部门 · 新PDPL（2026.1生效）DPIA/CTIA</text>
+        <line class="flowarrow" x1="380" y1="248" x2="380" y2="276" marker-end="url(#arrVn)"/>
+        <rect class="flowbox" x="60" y="278" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="300" text-anchor="middle">④ 网络安全与数据本地化</text>
+        <text class="flowsub" x="380" y="320" text-anchor="middle">公安部 · 新网络安全法（2026.7.1生效）</text>
+        <line class="flowarrow" x1="380" y1="334" x2="380" y2="362" marker-end="url(#arrVn)"/>
+        <rect class="flowbox" x="60" y="364" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="386" text-anchor="middle">⑤ 运营与持续合规</text>
+        <text class="flowsub" x="380" y="406" text-anchor="middle">72小时事件通报 · 每6个月更新评估</text>
+      </svg>
+      </div>
+      <p class="flow-caption">说明：2025年初的政府机构重组把这条流程的"主管色彩"整体往公安系统偏移——原本由信息通信部统管的频谱与数据安全，现在频谱归科技部，数据安全与网络安全审查的关键权力集中在公安部。详见INST-01。</p>
+    </div>
+
+    <details class="dim" open>
+      <summary><span class="dim-code">REG</span> 监管架构 <span class="dim-foot">规则讲的是什么</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">REG-01</span><h4>频谱牌照</h4><span class="badge base">基础覆盖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>越南频谱分配节奏对ICT企业的可预测性，在机构重组后是否发生了实质变化，相比印尼/沙特处于什么位置。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>频谱和电信牌照的主管部门已从原信息通信部（MIC）转移到新组建的科技部（MOST，2025年3月起，由原MIC与原科技部合并而成）。</li>
+              <li>2024年底5G商用，目前在做Open RAN试点和6G工作组筹备。</li>
+              <li>GSMA曾给越南颁发"政府领导力奖"，称其频谱决策务实、协调且有效——这一评价发生在机构重组之前，时效性需留意。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>机构重组后，频谱审批的实际节奏和此前相比是加快还是放缓？</li>
+              <li>越南后续频段释放计划（3.5GHz/毫米波）的具体时间表是怎样的？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">REG-02</span><h4>数据治理</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>越南数据治理体系从"决议层级"升级为"国家法律层级"后，合规义务实际增加了多少，这种增量对不同规模企业的负担是否成比例。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>2025年6月26日，越南国会通过《个人数据保护法》（PDPL，第91/2025/QH15号法），2026年1月1日正式生效，取代此前2023年第13号法令，数据保护规则从行政决议升级为国会立法。</li>
+              <li>配套实施细则《第356/2025号政府令》于2025年12月31日颁布，与PDPL同日生效。</li>
+              <li>跨境数据传输违规最高罚款为上一年度营收的5%或30亿越南盾（约11.5万美元），以较高者为准；非法买卖数据最低罚3亿越南盾，最高为违法所得10倍。</li>
+              <li>中小企业和初创公司有5年宽限期（自PDPL生效日起算）可暂不执行影响评估文件和指定数据保护人员的要求，但若处理10万人以上数据、提供数据处理服务、或直接处理敏感数据，宽限期不适用。</li>
+              <li>2026年的一份政策评论指出，PDPL并未取代2022年网络安全法下的数据本地化要求，而是在其基础上"叠加"了一层新的合规义务——意味着合规成本是累加的，不是简化的。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>PDPL叠加在原有本地化要求之上，企业实际感受到的合规成本增量有多大？</li>
+              <li>5年宽限期的门槛（10万数据主体）对中型ICT企业是不是一个现实的考验线？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">REG-03</span><h4>安全审查</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>越南网络安全监管权力高度集中到公安部之后，企业在数据安全/内容合规上面对的审查标准和执行力度，相比印尼/沙特由专门技术部门主导的模式有何不同。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>越南2025年3月完成大规模政府机构重组——原MIC的网络安全/信息安全职能被整体划入公安部（MPS），集中到其"网络安全和高技术犯罪预防局"（A05部门）。</li>
+              <li>新《网络安全法》（第116/2025/QH15号法）于2025年12月10日通过，2026年7月1日（本周内）正式生效，整合取代2018年网络安全法和2015年网络信息安全法。</li>
+              <li>新法设定"黄金时限"——违规内容须在监管部门要求后24小时内下架，紧急情况下6小时内下架。</li>
+              <li>新法延续数据本地化要求（账号信息、服务使用时长、缴费信息、访问IP地址等），并要求受监管的外国企业在越南设立分支机构或代表处。</li>
+              <li>新法将"国家重要信息系统"列入能源、金融、银行、电信、交通、自然资源环境、化工、卫生、文化、新闻媒体等领域，三级（Level 3）系统需经过网络安全资质评估、认证及年度检查。</li>
+              <li>国家机关数字化转型/信息技术投资预算中，至少15%须用于网络安全防护。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>A05部门的审查标准和执行尺度，相比此前MIC/MPS协同管理模式有何变化？</li>
+              <li>纯ICT/云服务企业是否会被纳入"国家重要信息系统"名单（目前列出的电信本身在列，但云/SaaS是否算在内尚不明确）？</li>
+              <li>新法24小时下架要求对企业内容审核团队的实际运营成本影响有多大？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+
+    <details class="dim">
+      <summary><span class="dim-code">INST</span> 制度行为者 <span class="dim-foot">谁来管</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">INST-01</span><h4>政策＋监管机构架构</h4><span class="badge deep">已深挖（2025年机构重组重大更新）</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>越南2025年大规模政府机构重组对外资ICT企业实际打交道的窗口和流程产生了什么具体影响，过渡期内是否存在审批延误风险。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>越南2025年2月18日起实施政府机构大重组（依据国会第176号决议），原信息通信部（MIC）被撤销，整体并入科技部（MOST），形成统管科学、技术、创新、数字化转型四大支柱的新"科技部"，原MIC的电信、频谱、邮政、ICT产业职能转入其中。</li>
+              <li>MIC原有的网络安全/信息安全职能被划入公安部（MPS），新闻出版职能划入文化体育旅游部，原"广播电子信息局"（监管社交媒体/网络游戏）随之转入文旅部。</li>
+              <li>同一轮重组中，原负责外资投资审批的计划投资部（MPI）并入财政部，外资进入越南的投资许可窗口归属也发生了变化。</li>
+              <li>有报道称，三大运营商之一MobiFone（约20%市场份额）的行政归口已转入公安部体系——该信息目前仅见于单一来源，需要进一步核实。</li>
+              <li>此次重组将全国行政单位数量从42个精简到25个，精简幅度40.5%。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>MobiFone归口公安部的说法是否准确，对其在频谱/牌照审批中的地位有何实际影响？</li>
+              <li>机构重组的过渡期对企业当前在途的审批申请有何实际影响？</li>
+              <li>原MIC的电信监管执行机构（VNTA）在新科技部架构下是否依然存在，还是已被整合？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">INST-02</span><h4>主要市场参与者</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>三大运营商全部国资/军资的市场结构，对外资新进入者的实际竞争环境构成什么具体限制。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>Viettel（国防部直属军工企业，100%国有资本）约占50%市场份额，董事长由总理提名经党中央委员会同意。</li>
+              <li>VNPT旗下VinaPhone约占25%市场份额，是国企。</li>
+              <li>MobiFone约占20%市场份额，是国企，行政归口可能已转入公安部（待核实，见INST-01）。</li>
+              <li>三家运营商全部为国资/军资背景，越南电信市场不存在真正意义上的私营或外资控股运营商，比印尼更极端（印尼至少有外资背景的IOH）。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>这种"全员国资"格局下，外资企业进入市场的实际竞争策略空间是什么（合资？技术合作？纯设备供应？）？</li>
+              <li>Viettel的军工企业身份，是否在频谱分配或牌照审批中获得额外优先级？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">INST-03</span><h4>行业协会</h4><span class="badge pending">待研究</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>越南是否存在能代表外资/中小企业诉求的独立行业协会，其在政策对话中的实际分量如何。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>尚未找到对应活跃度可比的本地行业协会信息。</li>
+              <li>美国-东盟商业理事会、亚洲互联网联盟等区域性商业组织，已就PDPL叠加效应公开表达过合规成本担忧，但这是区域性外部组织，不是越南本地行业协会。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>是否存在类似APJII的越南本地独立电信/互联网协会？</li>
+              <li>美国-东盟商业理事会等组织的诉求后续是否对越南政策产生了实际影响？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+
+    <details class="dim">
+      <summary><span class="dim-code">PE</span> 政治经济 <span class="dim-foot">为什么这样设、谁得利</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">PE-01</span><h4>产业政策激励</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>越南通过国家资源打造"科技国家冠军"（Viettel模式）的产业政策，对外资/民营ICT企业是否构成隐性挤出效应。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>Viettel的"技术主权"战略——投入研发5G硬件、芯片、机器人技术，2024年营收72亿美元，持有30项美国专利。</li>
+              <li>这是用国家资源打造"科技国家冠军"的扶持式产业政策，跟印尼TKDN（门槛保护式）的逻辑不同。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>这种扶持模式是否伴随对外资/民营企业的隐性挤出（频谱/资金/人才优先分配）？</li>
+              <li>Viettel的海外扩张是否反过来为越南本土ICT产业创造了外溢供应链机会？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">PE-02</span><h4>地缘政治压力</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>越南在外资电信准入规则上"选择性放行"（如Starlink）背后的地缘政治考量，以及这种考量未来是否会扩展到其他外资ICT领域。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>2025年3月，越南总理承诺为Starlink快速放行牌照，并允许卫星互联网服务商100%外资持股（突破常规49%上限）。</li>
+              <li>数据本地化规则推出后，加拿大、日本等CPTPP贸易伙伴公开提出这跟越南在CPTPP电子商务条款中的承诺存在冲突。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>Starlink特批案例后续是否扩展到其他外资电信细分领域？</li>
+              <li>CPTPP伙伴的施压是否会实际推动越南调整数据本地化规则？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">PE-03</span><h4>采购偏向</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>外资在基础设施类电信合资企业中49%的出资上限，对潜在外资合作模式的实际限制有多大。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>外资在基础设施类电信合资企业中的出资比例上限是49%，拿不到控制权。</li>
+              <li>三大运营商全部国资/军资，构成事实上的"国家资本垂直整合"市场结构。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>外资在拿不到控制权情况下参与市场的实际策略空间是什么？</li>
+              <li>是否存在类似Starlink的个案突破49%上限的先例可供参照？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+
+    <details class="dim">
+      <summary><span class="dim-code">GAP</span> 政策缺口 <span class="dim-foot">哪里不对劲（团队自建分类，非proposal原文子项）</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">GAP-01</span><h4>合规成本错位</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>PDPL与既有网络安全法本地化要求"叠加而非替代"的设计，对不同规模/不同司法管辖区企业的合规成本差异。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>美系大型平台面临最高5%年营收的跨境传输罚款，被迫重构全球数据架构，而主要在亚洲本地经营的竞争对手不需要处理这种跨境复杂性。</li>
+              <li>2025年5月，越南政府因Telegram拒绝配合刑事调查的数据共享要求而下令电信运营商封禁该应用。</li>
+              <li>2026年的一份政策评论明确指出，PDPL是叠加在网络安全法本地化要求之上的"第二层合规负担"，而非替代；OECD和世界银行的研究也指出，强制数据本地化普遍会提高云服务成本、压低中小企业跨境数字贸易参与度。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>中型/非美系企业是否同样面临类似合规成本压力，还是这主要是美系平台的特殊困境？</li>
+              <li>美国-东盟商业理事会等组织提出的"叠加合规负担"诉求，后续是否会推动越南政府调整规则设计？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">GAP-02</span><h4>时间表错位</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>新数据保护法（2026年1月）和新网络安全法（2026年7月）在半年内连续生效，给企业留出的实际合规准备窗口是否合理。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>新PDPL（2026年1月1日生效）和新网络安全法（2026年7月1日生效）在半年内连续生效，企业要连续应对两套新规则的调整。</li>
+              <li>新网络安全法生效后，此前在旧体系下取得的网络安全/民用密码相关业务许可证将持续有效至原到期日，提供一定的过渡缓冲。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>半年的窗口期对中小型ICT企业而言是否足够完成两套新规则的合规准备？</li>
+              <li>新网络安全法的具体实施细则（仍待政府颁布配套法令）会不会进一步压缩企业的实际准备时间？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">GAP-03</span><h4>主体规模错位</h4><span class="badge pending">待研究</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>Starlink这类巨头能拿到外资持股上限的特批，中小型外资ICT/电信创业公司是否有等价的政策选项。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>Starlink这种巨头能拿到100%外资特批，中小型卫星/电信创业公司有没有同等待遇不明。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>越南是否存在面向中小型外资创业公司的电信牌照便利化机制？</li>
+              <li>中小企业的5年合规宽限期（见REG-02）是否足以抵消"拿不到大企业级别特批"的劣势？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SAUDI ARABIA -->
+  <!-- ============================================================ -->
+  <section class="panel panel-sa">
+    <div class="panel-head">
+      <h2>沙特阿拉伯 — 研究重点：本地化采购打分制（IKTVA/LCGPA/EPP）+ 主权基金复合角色</h2>
+      <span class="panel-note">本版补充企业监管流程图</span>
+    </div>
+
+    <div class="flow-wrap">
+      <p class="flow-title">企业进入沙特ICT市场的监管流程（示意）</p>
+      <div class="flow-svg-box">
+      <svg viewBox="0 0 760 530" width="100%" role="img">
+        <title>沙特ICT市场准入监管流程图</title>
+        <desc>设立本地实体后，企业需依次通过电信牌照、数据保护、网络安全合规，再视合同性质完成本地化采购评分，最后进入持续合规运营阶段。沙特的审批环节数量是三国中最多的。</desc>
+        <defs>
+          <marker id="arrSa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <rect class="flowbox" x="60" y="20" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="42" text-anchor="middle">① 设立本地实体</text>
+        <text class="flowsub" x="380" y="62" text-anchor="middle">MISA投资许可</text>
+        <line class="flowarrow" x1="380" y1="76" x2="380" y2="104" marker-end="url(#arrSa)"/>
+        <rect class="flowbox" x="60" y="106" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="128" text-anchor="middle">② 电信牌照与频谱</text>
+        <text class="flowsub" x="380" y="148" text-anchor="middle">CST</text>
+        <line class="flowarrow" x1="380" y1="162" x2="380" y2="190" marker-end="url(#arrSa)"/>
+        <rect class="flowbox" x="60" y="192" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="214" text-anchor="middle">③ 数据保护合规</text>
+        <text class="flowsub" x="380" y="234" text-anchor="middle">SDAIA · PDPL（本地化执行口径待核实）</text>
+        <line class="flowarrow" x1="380" y1="248" x2="380" y2="276" marker-end="url(#arrSa)"/>
+        <rect class="flowbox" x="60" y="278" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="300" text-anchor="middle">④ 网络安全合规</text>
+        <text class="flowsub" x="380" y="320" text-anchor="middle">NCA · 基本网络安全控制(ECC)</text>
+        <line class="flowarrow" x1="380" y1="334" x2="380" y2="362" marker-end="url(#arrSa)"/>
+        <rect class="flowbox" x="60" y="364" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="386" text-anchor="middle">⑤ 本地化采购评分</text>
+        <text class="flowsub" x="380" y="406" text-anchor="middle">LCGPA(政府合同) / IKTVA(供阿美) / EPP(大型ICT招标)</text>
+        <line class="flowarrow" x1="380" y1="420" x2="380" y2="448" marker-end="url(#arrSa)"/>
+        <rect class="flowbox" x="60" y="450" width="640" height="56" rx="10"/>
+        <text class="flowtitle" x="380" y="472" text-anchor="middle">⑥ 运营与投标资格维持</text>
+        <text class="flowsub" x="380" y="492" text-anchor="middle">年度本地化报告</text>
+      </svg>
+      </div>
+      <p class="flow-caption">说明：⑤是沙特独有的复杂环节——同一家企业可能需要同时满足三套不同的本地化考核体系，具体取决于合同对象是政府、阿美还是大型基建/ICT招标项目。沙特是三国中审批环节最多、机构最碎片化的市场，详见INST-01。</p>
+    </div>
+
+    <details class="dim" open>
+      <summary><span class="dim-code">REG</span> 监管架构 <span class="dim-foot">规则讲的是什么</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">REG-01</span><h4>频谱牌照</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>沙特频谱分配节奏（三国中最快）跟proposal原本预设的"procurement rules问题国家"定位是否存在张力，这条线是否值得纳入研究重点。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>监管机构是CST（通信、空间与技术委员会，原CITC，2022年改名），依据2022年电信法运作。</li>
+              <li>三大运营商STC/Mobily/Zain持有统一电信牌照，有效期分别到2045/2043/2047年，是三国里牌照周期最长的。</li>
+              <li>2024年11月完成600MHz/700MHz/3.8GHz频段拍卖，授权频谱总量增加27%；沙特是EMEA/ITU第一区第一个分配600MHz频段的国家，3.5GHz频段分配量仅次于日本。</li>
+              <li>2024年8月推出"轻量许可"机制，支持企业自建5G专网。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>沙特频谱进度的领先地位，是否说明proposal原定位的"procurement rules问题国家"标签需要调整或补充？</li>
+              <li>这条线是否应该作为沙特案例的研究重点之一，还是保持基础覆盖即可？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">REG-02</span><h4>数据治理</h4><span class="badge deep">已深挖（资料矛盾，待核实）</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>沙特数据本地化要求"宽松vs收紧"的真实执行口径，这个不确定性本身对云/SaaS类ICT企业的市场进入决策构成多大影响。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>核心法律是2021年颁布、2023年9月正式生效（一年合规宽限期到2024年9月）的《个人数据保护法》（PDPL），由SDAIA监管。</li>
+              <li>域外效力覆盖任何处理沙特境内个人数据的主体，范围比印尼UU PDP还宽。</li>
+              <li>跨境传输需SDAIA认定接收国"足够保护水平"或采用批准的标准合同条款，且SDAIA保留以国家安全为由随时叫停传输的权力；目前SDAIA尚未公布任何"适当国家"清单。</li>
+              <li>违规最高罚款500万里亚尔（约130万美元），情节严重可判刑最高2年。</li>
+            </ol></dd>
+            <dt>待研究（资料相互矛盾，重点核实）</dt>
+            <dd class="pending"><ol>
+              <li>2025年贸易资料显示沙特已要求敏感/身份类数据须本地存储，这个执行要求具体覆盖哪些数据类型、哪些行业？</li>
+              <li>同期美国国务院投资报告称除10年税务记录留存外沙特对数据存储位置没有强制要求，这两份资料为何结论相反？</li>
+              <li>在SDAIA未公布"适当国家"清单的情况下，企业实际依赖的跨境传输机制（标准合同条款）审批耗时大概多久？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">REG-03</span><h4>安全审查</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>NCA的网络安全基本控制（ECC）对ICT行业（相对于关键基础设施/政府机构）的具体适用门槛，企业实际感受到的审查严格程度。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>国家网络安全局（NCA）自2018年起制定并持续更新"基本网络安全控制"（ECC），为受监管组织设定最低网络安全门槛。</li>
+              <li>ECC与PDPL第22条的技术安全要求高度联动，共同构成市场准入和运营许可的合规基础。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>ECC对纯ICT/云服务企业（相对于关键基础设施运营商）的具体适用门槛是什么？</li>
+              <li>NCA和SDAIA在审查流程上是否存在重叠或协同机制？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+
+    <details class="dim">
+      <summary><span class="dim-code">INST</span> 制度行为者 <span class="dim-foot">谁来管</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">INST-01</span><h4>政策＋监管机构架构</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>四个独立部门（CST/SDAIA/NCA/LCGPA，及2025年新设的EPP执行体系）分别审批，对企业整体合规时间表造成多大的叠加延误。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>CST管频谱和电信牌照，SDAIA管数据，NCA管网络安全，LCGPA管政府采购本地化——是三国里机构最碎片化的。</li>
+              <li>2025年新设的"经济参与计划"（EPP）由工业部、LCGPA和行业主管部门联合执行，已扩展到ICT和基建领域。</li>
+              <li>一家外资ICT企业理论上最多要同时面对四个不同部门，比印尼（两个）、越南（科技部+公安部，两个）都多。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>这四个部门之间是否有正式的协调机制（联合审批窗口、信息共享系统）？</li>
+              <li>企业实际申请流程中，是否可以并行提交各部门申请，还是必须按顺序逐一通过？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">INST-02</span><h4>主要市场参与者</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>PIF对电信基础设施（运营商股权+铁塔资产）的持续整合趋势，是否会进一步压缩独立第三方在该领域的参与空间。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>STC（沙特电信）控股股东是主权财富基金PIF，持股62%（2021年为64%，2024年11月出售2%股份后降至62%）。</li>
+              <li>Mobily和Zain是2003-2008年市场开放后陆续发牌的竞争性运营商。</li>
+              <li>2024年PIF与STC达成协议，合并组建区域最大电信铁塔公司（TAWAL+GLIC），新实体PIF持股54%、STC持股43.1%。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>PIF在电信基础设施（铁塔、数据中心）领域的持续整合趋势，是否会进一步强化国家资本对市场的控制力？</li>
+              <li>Mobily和Zain在面对STC+PIF的资本优势时，实际的竞争策略空间是什么？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">INST-03</span><h4>行业协会</h4><span class="badge pending">待研究</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>沙特是否存在能独立于政府资本渠道、代表外资/中小型ICT企业诉求的行业协会。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>暂未找到独立于政府的活跃电信行业协会。</li>
+              <li>沙特的"行业声音"看起来更多通过PIF/阿美这种国家资本渠道表达，而不是独立协会——这是个值得提出的观察点，但需访谈验证而非凭空下结论。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>是否存在尚未被发现的、活跃度可观的行业协会？</li>
+              <li>外资ICT企业在沙特通常通过什么渠道（商会？双边经贸论坛？）表达政策诉求？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+
+    <details class="dim">
+      <summary><span class="dim-code">PE</span> 政治经济 <span class="dim-foot">为什么这样设、谁得利</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">PE-01</span><h4>产业政策激励</h4><span class="badge deep">已深挖 · 沙特headline所在</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>IKTVA/LCGPA/EPP三套打分制并行的本地化政策体系，对ICT企业的实际评分权重和准入门槛，相比印尼TKDN的硬性百分比制有何本质不同——这是proposal原文给沙特定位的"procurement rules"研究重点的具体落点。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>IKTVA是阿美石油专属的供应商考核体系，目标2025年本地化采购达70%，仅适用于供应阿美及其关联企业的供应商。</li>
+              <li>LCGPA是国家层面的政府采购本地化监管机构，适用于政府类合同的本地化评分。</li>
+              <li>2025年起的EPP（经济参与计划）把本地化要求从国防、能源延伸到ICT和基建领域，要求外资企业投标时提交详细的"经济参与计划"（本地雇佣、本地采购、技术转让、设立区域总部等）。</li>
+              <li>跟印尼TKDN的硬性百分比门槛不同，沙特更偏向"打分制+投标加权"，灵活但也更不透明。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>EPP对ICT领域具体的评分权重和门槛是什么，跟IKTVA/LCGPA相比是更严还是更松？</li>
+              <li>一家ICT企业如果同时涉及政府合同、阿美供应链、大型基建招标，是否需要分别准备三套不同的本地化材料？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">PE-02</span><h4>地缘政治压力</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>沙特在5G设备和云基础设施上"两边下注"（华为+美系云厂商并行）的策略，对ICT企业实际准入审批是否存在基于来源国的差异化标准。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>STC与华为合作部署SuperLink 5G远程覆盖方案。</li>
+              <li>2025年11月，PIF与微软签署MoU探索主权云服务合作。</li>
+              <li>沙特实际上是三国里地缘站位最"两边下注"的——既用华为设备，又拉美系云厂商做主权云，跟越南"在美中之间选边"的紧张感不同。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>这种"两头都要"的策略在ICT企业实际准入审批中是否会产生明确的利好/限制（对中国厂商和美国厂商是否有不同审查标准）？</li>
+              <li>PIF与微软的主权云合作具体进展到什么阶段，是否已有明确的落地时间表？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">PE-03</span><h4>采购偏向</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>PIF身兼"市场最大玩家控股股东"和"国家招商引资操盘手"双重角色，是否在具体审批个案中给STC带来超出常规的隐性优待。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>PIF既是STC的控股股东，又是Vision 2030整体招商引资战略的执行主体——三国里唯一一个"国家投资机构"和"市场监管/产业政策制定方"高度重叠的案例。</li>
+              <li>印尼是财政部式传统国有股权，越南是军方直接经营，沙特是主权财富基金既当股东又当操盘手，角色最复合。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>这种复合角色在具体审批个案中，是否给STC带来超出常规的隐性优待？</li>
+              <li>Mobily/Zain在跟STC竞争招商引资资源时，处于什么相对位置？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+
+    <details class="dim">
+      <summary><span class="dim-code">GAP</span> 政策缺口 <span class="dim-foot">哪里不对劲（团队自建分类，非proposal原文子项）</span></summary>
+      <div class="subitems">
+
+        <article class="card">
+          <div class="card-head"><span class="code">GAP-01</span><h4>合规成本错位</h4><span class="badge pending">待研究</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>数据本地化规则本身"宽严不明"的状态，对正在评估进入沙特市场的云/SaaS企业的决策成本影响。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>全球云计算/SaaS企业的标准架构模式，可能需要为满足沙特敏感数据本地存储要求而重构，但由于规则本身"到底多严"还不确定（见REG-02矛盾点），合规成本到底有多高现在还说不准。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>规则不确定性本身造成的决策延迟/机会成本，企业是如何内部评估的？</li>
+              <li>是否有企业因为这种不确定性而推迟或取消了进入沙特市场的计划？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">GAP-02</span><h4>时间表错位</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>PDPL分批次生效（法律生效→跨境本地化实质执行）的节奏，是否给企业造成了"以为已经合规、实际尚未达标"的误判风险。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>PDPL本身2023年9月正式生效（给企业一年宽限期到2024年9月），而跨境数据传输的本地存储要求是2025年才开始实质执行——同一套法律的不同条款分批次、跨年度逐步生效。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>企业是否容易在某个时间点上误判自己的合规状态？</li>
+              <li>后续是否还有更多条款会分批生效（比如SDAIA的"适当国家"清单何时会公布）？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="code">GAP-03</span><h4>主体规模错位</h4><span class="badge deep">已深挖</span></div>
+          <dl class="fields">
+            <dt>要研究什么</dt>
+            <dd>阿美供应商注册流程的时间成本（3-9个月），对中小型ICT企业相对于大型企业的竞争劣势的具体量级。</dd>
+            <dt>目前现状</dt>
+            <dd class="current"><ol>
+              <li>IKTVA官方资料强调中小企业也能通过细分领域服务参与阿美供应链。</li>
+              <li>但外国企业完成阿美供应商注册流程通常需要3到9个月，这个时间成本对资源有限的中小企业显然比对大型企业更难承受。</li>
+            </ol></dd>
+            <dt>待研究</dt>
+            <dd class="pending"><ol>
+              <li>中小企业在EPP框架下提交"经济参与计划"的实际竞争力，跟大型企业相比差距有多大？</li>
+              <li>是否存在专门面向中小企业的本地化合规简化通道？</li>
+            </ol></dd>
+          </dl>
+        </article>
+
+      </div>
+    </details>
+  </section>
+
+  <footer>
+    数据来源：公开监管文件、行业媒体、企业披露资料整理，截至本版更新时点（2026年6月）。部分细节（标注"待研究"）需通过访谈核实，不构成最终结论。"政策缺口"维度的三个子项为团队自建分类框架，非GSMA proposal原文用词，对外沟通前建议确认措辞。越南部分因2025年政府机构重组涉及面广，VNTA现状等少数细节仍待进一步核实。
+  </footer>
+
+</div>
+</body>
+</html>
