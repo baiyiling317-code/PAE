@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HKUST MPP PAE × GSMA | Scoping Meeting Deck</title>
+<style>
+  :root{
+    --hkust-blue:#003A70;
+    --hkust-blue-2:#0B4F8A;
+    --hkust-gold:#B4975A;
+    --hkust-gold-2:#D6C18D;
+    --ink:#172033;
+    --muted:#5D6778;
+    --light:#F7F8FA;
+    --paper:#FFFFFF;
+    --line:#DDE3EA;
+    --soft-blue:#EAF2FA;
+    --soft-gold:#F7F1E3;
+    --success:#2A6F68;
+    --red:#C82127;
+    --shadow:0 18px 48px rgba(0, 38, 75, .12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family: Inter, Arial, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color:var(--ink);
+    background:linear-gradient(135deg,#F3F6FA 0%, #FFFFFF 42%, #F8F4EA 100%);
+    line-height:1.45;
+  }
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:20;
+    height:56px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,58,112,.12);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 28px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--hkust-blue);letter-spacing:.02em;}
+  .mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--hkust-blue),#0D5C9E);position:relative;box-shadow:0 8px 22px rgba(0,58,112,.22);} 
+  .mark:after{content:"";position:absolute;right:-6px;bottom:6px;width:18px;height:18px;border-radius:50%;background:var(--hkust-gold);border:3px solid #fff;}
+  .nav{display:flex;gap:14px;font-size:13px;color:var(--muted);} 
+  .nav a{color:var(--muted);text-decoration:none;padding:6px 4px;border-bottom:2px solid transparent;}
+  .nav a:hover{color:var(--hkust-blue);border-color:var(--hkust-gold);} 
+
+  .deck{padding-top:56px;}
+  section.slide{
+    min-height:calc(100vh - 56px);
+    padding:64px 7vw 58px;
+    display:flex;align-items:center;
+    scroll-snap-align:start;
+  }
+  .canvas{width:100%;max-width:1180px;margin:0 auto;}
+  .eyebrow{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--hkust-gold);font-weight:800;margin:0 0 12px;}
+  h1,h2,h3,p{margin-top:0;}
+  h1{font-size:58px;line-height:1.04;letter-spacing:-.035em;margin-bottom:22px;color:var(--hkust-blue);max-width:980px;}
+  h2{font-size:40px;line-height:1.1;letter-spacing:-.025em;margin-bottom:18px;color:var(--hkust-blue);}
+  h3{font-size:22px;line-height:1.2;margin-bottom:10px;color:var(--ink);} 
+  .lead{font-size:22px;color:var(--muted);max-width:880px;margin-bottom:28px;}
+  .body{font-size:17px;color:var(--muted);} 
+  .small{font-size:13px;color:var(--muted);} 
+  .tagrow{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0;}
+  .tag{font-size:13px;padding:8px 12px;border-radius:999px;background:var(--soft-blue);color:var(--hkust-blue);border:1px solid rgba(0,58,112,.12);font-weight:700;}
+  .tag.gold{background:var(--soft-gold);color:#7B6128;border-color:rgba(180,151,90,.25);} 
+  .hero-card{background:rgba(255,255,255,.86);border:1px solid rgba(0,58,112,.14);border-radius:28px;padding:42px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+  .hero-card:before{content:"";position:absolute;right:-120px;top:-140px;width:360px;height:360px;border-radius:50%;background:rgba(180,151,90,.18);} 
+  .hero-card:after{content:"";position:absolute;right:88px;bottom:-110px;width:280px;height:280px;border-radius:50%;background:rgba(0,58,112,.09);} 
+  .hero-content{position:relative;z-index:1;}
+  .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px;}
+  .meta .item{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;}
+  .meta b{display:block;color:var(--hkust-blue);font-size:14px;margin-bottom:4px;}
+  .meta span{font-size:14px;color:var(--muted);} 
+
+  .two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:stretch;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 10px 28px rgba(0,38,75,.06);} 
+  .card.blue{background:linear-gradient(180deg,#fff,var(--soft-blue));border-color:rgba(0,58,112,.18);} 
+  .card.gold{background:linear-gradient(180deg,#fff,var(--soft-gold));border-color:rgba(180,151,90,.24);} 
+  .num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--hkust-blue);color:#fff;font-weight:800;font-size:14px;margin-bottom:14px;}
+  .num.gold{background:var(--hkust-gold);} 
+  .card p{color:var(--muted);font-size:16px;margin-bottom:0;}
+
+  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 14px 34px rgba(0,38,75,.07);} 
+  .step{padding:24px 20px;position:relative;min-height:158px;border-right:1px solid var(--line);} 
+  .step:last-child{border-right:none;} 
+  .step:after{content:"";position:absolute;right:-10px;top:50%;width:20px;height:20px;transform:translateY(-50%) rotate(45deg);background:#fff;border-top:1px solid var(--line);border-right:1px solid var(--line);z-index:3;} 
+  .step:last-child:after{display:none;} 
+  .step .label{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--hkust-gold);font-weight:800;margin-bottom:10px;} 
+  .step h3{font-size:19px;margin-bottom:8px;color:var(--hkust-blue);} 
+  .step p{font-size:14px;color:var(--muted);margin:0;} 
+
+  .framework{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+  .pillar{background:#fff;border:1px solid var(--line);border-left:6px solid var(--hkust-blue);border-radius:18px;padding:22px;}
+  .pillar:nth-child(even){border-left-color:var(--hkust-gold);} 
+  .pillar h3{font-size:20px;color:var(--ink);}
+  .pillar p{font-size:15px;color:var(--muted);margin:0;} 
+
+  .matrix{display:grid;grid-template-columns:1.1fr repeat(3,1fr);border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 14px 34px rgba(0,38,75,.06);margin-top:24px;} 
+  .cell{padding:18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:15px;color:var(--muted);} 
+  .cell:nth-child(4n){border-right:none;} 
+  .cell.head{background:var(--hkust-blue);color:#fff;font-weight:800;} 
+  .cell.subhead{background:#F3F6FA;color:var(--hkust-blue);font-weight:800;} 
+  .cell.goldhead{background:var(--hkust-gold);color:#fff;font-weight:800;} 
+  .cell.lastrow{border-bottom:none;} 
+
+  .timeline{position:relative;margin-top:34px;padding:28px 0 8px;}
+  .timeline:before{content:"";position:absolute;left:4%;right:4%;top:62px;height:4px;background:linear-gradient(90deg,var(--hkust-blue),var(--hkust-gold));border-radius:999px;}
+  .tgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;}
+  .titem{position:relative;padding-top:54px;} 
+  .dot{position:absolute;top:22px;left:0;width:20px;height:20px;border-radius:50%;background:#fff;border:5px solid var(--hkust-blue);box-shadow:0 0 0 5px rgba(0,58,112,.08);} 
+  .titem:nth-child(n+4) .dot{border-color:var(--hkust-gold);box-shadow:0 0 0 5px rgba(180,151,90,.12);} 
+  .titem h3{font-size:16px;color:var(--hkust-blue);margin-bottom:8px;}
+  .titem p{font-size:13px;color:var(--muted);margin:0;}
+
+  .ask-list{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;}
+  .ask{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;}
+  .ask .q{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--soft-gold);color:#735A20;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .ask p{margin:0;font-size:16px;color:var(--ink);} 
+
+  .deliverables{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px;} 
+  .deliverable{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;min-height:210px;position:relative;overflow:hidden;} 
+  .deliverable:before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--hkust-blue);} 
+  .deliverable:nth-child(even):before{background:var(--hkust-gold);} 
+  .deliverable h3{font-size:18px;color:var(--hkust-blue);} 
+  .deliverable p{font-size:15px;color:var(--muted);margin:0;} 
+
+  .closing{display:grid;grid-template-columns:.9fr 1.1fr;gap:26px;align-items:center;}
+  .big-number{font-size:88px;line-height:.9;color:var(--hkust-gold);font-weight:900;letter-spacing:-.06em;} 
+  .quote{font-size:30px;line-height:1.22;color:var(--hkust-blue);font-weight:800;letter-spacing:-.02em;} 
+  .nextbox{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow);} 
+  .nextbox ul{margin:0;padding-left:20px;color:var(--muted);font-size:17px;} 
+  .nextbox li{margin:10px 0;} 
+
+  .footer-note{position:absolute;bottom:20px;left:7vw;right:7vw;font-size:11px;color:#8290A1;display:flex;justify-content:space-between;} 
+  section.slide{position:relative;}
+
+  @media (max-width:900px){
+    .nav{display:none;} h1{font-size:42px;} h2{font-size:32px;} .lead{font-size:19px;}
+    .two-col,.closing{grid-template-columns:1fr;} .grid-3,.grid-4,.deliverables,.ask-list,.framework{grid-template-columns:1fr;} .flow{grid-template-columns:1fr;} .step{border-right:none;border-bottom:1px solid var(--line);} .step:after{display:none;} .meta{grid-template-columns:1fr;} .matrix{grid-template-columns:1fr;} .cell{border-right:none;} .tgrid{grid-template-columns:1fr 1fr;} .timeline:before{display:none;}
+  }
+  @media print{
+    body{background:#fff;} .topbar{display:none;} .deck{padding-top:0;} section.slide{min-height:auto;page-break-after:always;padding:36px;} .hero-card,.card,.flow,.matrix,.nextbox{box-shadow:none;} .footer-note{display:none;}
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand"><span class="mark"></span><span>HKUST MPP PAE × GSMA</span></div>
+    <nav class="nav">
+      <a href="#s1">Purpose</a><a href="#s3">Proposal</a><a href="#s5">Scoping</a><a href="#s7">Plan</a><a href="#s9">Next</a>
+    </nav>
+  </div>
+
+  <main class="deck">
+    <section class="slide" id="s1">
+      <div class="canvas hero-card">
+        <div class="hero-content">
+          <p class="eyebrow">Client scoping meeting</p>
+          <h1>Exploring a practical policy analysis partnership with GSMA</h1>
+          <p class="lead">A preliminary discussion to align GSMA’s policy priorities with an HKUST MPP Policy Analysis Exercise on ICT market expansion and regulatory barriers in emerging digital markets.</p>
+          <div class="tagrow">
+            <span class="tag">Applied policy research</span>
+            <span class="tag">Client-oriented recommendations</span>
+            <span class="tag gold">ICT regulation & market access</span>
+            <span class="tag gold">APAC digital policy</span>
+          </div>
+          <div class="meta">
+            <div class="item"><b>Prepared for</b><span>Jeanette Whyte, GSMA</span></div>
+            <div class="item"><b>Prepared by</b><span>HKUST MPP PAE Student Team</span></div>
+            <div class="item"><b>Meeting objective</b><span>Align scope, priorities and next steps</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-note"><span>Confidential discussion draft</span><span>HKUST Division of Public Policy</span></div>
+    </section>
+
+    <section class="slide" id="s2">
+      <div class="canvas">
+        <p class="eyebrow">Today’s purpose</p>
+        <h2>From preliminary idea to a client-relevant policy question</h2>
+        <p class="lead">We would like to use today’s meeting to validate the policy relevance of our initial proposal, understand GSMA’s current priorities, and refine the project into a focused and useful PAE engagement.</p>
+        <div class="flow">
+          <div class="step"><div class="label">01</div><h3>Brief context</h3><p>Introduce PAE format and our initial research hypothesis.</p></div>
+          <div class="step"><div class="label">02</div><h3>GSMA priorities</h3><p>Understand the policy issues and markets most relevant to your team.</p></div>
+          <div class="step"><div class="label">03</div><h3>Scope alignment</h3><p>Discuss markets, regulatory dimensions and intended audience.</p></div>
+          <div class="step"><div class="label">04</div><h3>Research design</h3><p>Test feasible methods, sources, interviews and sensitivities.</p></div>
+          <div class="step"><div class="label">05</div><h3>Next steps</h3><p>Agree on a revised concept note and collaboration rhythm.</p></div>
+        </div>
+      </div>
+      <div class="footer-note"><span>Meeting flow</span><span>Approx. 30–40 minutes</span></div>
+    </section>
+
+    <section class="slide" id="s3">
+      <div class="canvas two-col">
+        <div>
+          <p class="eyebrow">Our starting hypothesis</p>
+          <h2>Market entry barriers are often institutional, not only regulatory</h2>
+          <p class="lead">Our preliminary view is that ICT firms in emerging digital markets face barriers created by formal rules, implementation uncertainty, institutional coordination gaps, and political economy pressures.</p>
+          <p class="body">Rather than producing a legal inventory, the project could compare how regulatory systems operate in practice and identify where policy design, implementation or stakeholder coordination may affect digital market development.</p>
+        </div>
+        <div class="card blue">
+          <h3>Preliminary research question</h3>
+          <p>What regulatory, institutional and political economy barriers do ICT firms face when entering or expanding in high-growth emerging digital markets — and what policy options could reduce these barriers while supporting digital development goals?</p>
+          <div class="tagrow"><span class="tag">To be refined with GSMA</span></div>
+        </div>
+      </div>
+      <div class="footer-note"><span>Preliminary proposal</span><span>For discussion, not a fixed scope</span></div>
+    </section>
+
+    <section class="slide" id="s4">
+      <div class="canvas">
+        <p class="eyebrow">Analytical framework</p>
+        <h2>A structured lens for comparing regulatory environments</h2>
+        <p class="lead">We propose an initial four-part framework that can be adjusted based on GSMA’s priorities and the intended use of the final output.</p>
+        <div class="framework">
+          <div class="pillar"><h3>1. Regulatory architecture</h3><p>Spectrum licensing, telecom authorization, data governance, cybersecurity and security review frameworks.</p></div>
+          <div class="pillar"><h3>2. Institutional actors</h3><p>Regulators, ministries, enforcement bodies, industry associations and the coordination mechanisms among them.</p></div>
+          <div class="pillar"><h3>3. Political economy</h3><p>Industrial policy, localization pressures, procurement preferences, strategic sectors and geopolitical considerations.</p></div>
+          <div class="pillar"><h3>4. Policy gaps</h3><p>Misalignment between policy objectives and firms’ operational needs, including uncertainty, compliance burden and implementation risk.</p></div>
+        </div>
+      </div>
+      <div class="footer-note"><span>Working framework</span><span>Designed for cross-market comparison</span></div>
+    </section>
+
+    <section class="slide" id="s5">
+      <div class="canvas">
+        <p class="eyebrow">Key scoping decisions</p>
+        <h2>Where would independent analysis be most useful to GSMA?</h2>
+        <p class="lead">Today’s discussion can help us make four practical scoping decisions before developing a revised concept note.</p>
+        <div class="matrix">
+          <div class="cell head">Decision area</div><div class="cell head">Current starting point</div><div class="cell head">Questions for GSMA</div><div class="cell goldhead">Desired alignment</div>
+          <div class="cell subhead">Markets</div><div class="cell">Indonesia, Vietnam, Saudi Arabia as initial candidates</div><div class="cell">Should the project remain APAC-focused? Which markets are most policy-relevant?</div><div class="cell">2–3 priority markets with clear client value</div>
+          <div class="cell subhead">Policy issues</div><div class="cell">Spectrum, data governance, cybersecurity, licensing, localization</div><div class="cell">Which issues are most relevant to GSMA’s current work?</div><div class="cell">A focused set of high-value policy dimensions</div>
+          <div class="cell subhead">Audience</div><div class="cell">GSMA policy team, member companies, regulators or external stakeholders</div><div class="cell">Who should the final report primarily serve?</div><div class="cell">Clear tone, format and recommendation style</div>
+          <div class="cell subhead lastrow">Deliverables</div><div class="cell lastrow">Comparative report, risk matrix, policy recommendations</div><div class="cell lastrow">Which output format would be most actionable?</div><div class="cell lastrow">A practical final product GSMA can use</div>
+        </div>
+      </div>
+      <div class="footer-note"><span>Scoping alignment</span><span>From broad interest to actionable scope</span></div>
+    </section>
+
+    <section class="slide" id="s6">
+      <div class="canvas">
+        <p class="eyebrow">Discussion prompts</p>
+        <h2>Questions we hope to explore with you</h2>
+        <p class="lead">These questions are intended to help us understand GSMA’s priorities and shape a project that is feasible, independent and useful.</p>
+        <div class="ask-list">
+          <div class="ask"><div class="q">1</div><p>Which policy or regulatory issues are currently most relevant to your team’s work?</p></div>
+          <div class="ask"><div class="q">2</div><p>Do our proposed market candidates match GSMA’s current priorities, or should we adjust them?</p></div>
+          <div class="ask"><div class="q">3</div><p>Among spectrum, data governance, cybersecurity, licensing and localization, which areas would be most valuable to examine?</p></div>
+          <div class="ask"><div class="q">4</div><p>Who would be the primary audience for the final report: internal policy team, member companies, regulators or external partners?</p></div>
+          <div class="ask"><div class="q">5</div><p>What kind of output would be most useful: comparative report, policy brief, risk matrix, stakeholder map or engagement recommendations?</p></div>
+          <div class="ask"><div class="q">6</div><p>What would make this project genuinely useful for GSMA by the end of the PAE cycle?</p></div>
+        </div>
+      </div>
+      <div class="footer-note"><span>Client discovery</span><span>Designed to refine needs, not assume them</span></div>
+    </section>
+
+    <section class="slide" id="s7">
+      <div class="canvas">
+        <p class="eyebrow">Possible final outputs</p>
+        <h2>Client-oriented deliverables we could develop</h2>
+        <p class="lead">Depending on GSMA’s priorities, the final output can combine policy analysis with practical tools for internal discussion, member engagement or policy dialogue.</p>
+        <div class="deliverables">
+          <div class="deliverable"><h3>Comparative policy report</h3><p>A structured analysis of regulatory and institutional barriers across selected markets, with evidence-based findings.</p></div>
+          <div class="deliverable"><h3>Regulatory risk matrix</h3><p>A concise comparison of market access barriers, implementation uncertainty and likely impact on ICT firms.</p></div>
+          <div class="deliverable"><h3>Stakeholder map</h3><p>Mapping of key ministries, regulators, industry bodies and policy actors relevant to market expansion.</p></div>
+          <div class="deliverable"><h3>Policy recommendations</h3><p>Actionable options framed around digital development, regulatory clarity and constructive industry-government engagement.</p></div>
+        </div>
+      </div>
+      <div class="footer-note"><span>Deliverable options</span><span>To be tailored with GSMA</span></div>
+    </section>
+
+    <section class="slide" id="s8">
+      <div class="canvas">
+        <p class="eyebrow">Indicative PAE workplan</p>
+        <h2>A structured research cycle from scoping to final report</h2>
+        <p class="lead">After today’s meeting, we would refine the concept note, confirm the project scope through the PAE process, and conduct research through document analysis, literature review and expert interviews where feasible.</p>
+        <div class="timeline">
+          <div class="tgrid">
+            <div class="titem"><span class="dot"></span><h3>Jul–Aug 2026</h3><p>Client scoping, advisor discussion, revised concept note and initial research design.</p></div>
+            <div class="titem"><span class="dot"></span><h3>Sep 2026</h3><p>Confirm team, advisor and client; submit initial prospectus.</p></div>
+            <div class="titem"><span class="dot"></span><h3>Oct–Nov 2026</h3><p>Client engagement agreement; final prospectus and detailed methodology.</p></div>
+            <div class="titem"><span class="dot"></span><h3>Dec 2026–Jan 2027</h3><p>Evidence collection, document review, interviews and regulatory mapping.</p></div>
+            <div class="titem"><span class="dot"></span><h3>Feb–Apr 2027</h3><p>Analysis, drafts, client feedback and final report development.</p></div>
+            <div class="titem"><span class="dot"></span><h3>May 2027</h3><p>PAE Conference presentation and revised client submission.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-note"><span>Indicative timeline</span><span>Subject to PAE requirements and client availability</span></div>
+    </section>
+
+    <section class="slide" id="s9">
+      <div class="canvas closing">
+        <div>
+          <p class="eyebrow">Proposed next step</p>
+          <div class="big-number">1–2</div>
+          <p class="quote">page revised concept note after today’s discussion</p>
+        </div>
+        <div class="nextbox">
+          <h2>What we hope to agree today</h2>
+          <ul>
+            <li>Priority policy issue areas where the project could add value to GSMA.</li>
+            <li>Preferred market scope and whether the project should remain APAC-focused.</li>
+            <li>Most useful deliverable format and intended audience.</li>
+            <li>Potential public sources, reports or expert contacts to guide the research.</li>
+            <li>A practical follow-up process for comments on the revised concept note.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-note"><span>Next steps</span><span>Thank you</span></div>
+    </section>
+  </main>
+</body>
+</html>
